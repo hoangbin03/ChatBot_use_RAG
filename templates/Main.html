@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" type="text/css" href="{{ url_for('static', filename='css/style.css') }}">
+    <title>ChatBot</title>
+</head>
+<body>
+    <div id="sidebar" class="active">
+        <div id="sidebar-header">
+            {% if user_name == "admin" %}
+            <strong><p class="mt-3"><a href="/embedding" class="no-underline"><i class="fa-solid fa-upload"></i>  Cập nhật dữ liệu</a></p></strong>
+            {% endif %}
+            <h2>Lịch sử</h2> 
+        </div>
+        <ul id="conversation-list">
+            {% for conversation in conversations %}
+                <li class="conversation-item">
+                    <div class="conversation-content">
+                        <a href="#" onclick="loadConversation({{ conversation.id }})">
+                            <span class="title">{{ conversation.title }}</span>
+                            <span class="date">({{ conversation.created_at }})</span>
+                        </a>
+                        <button class="btn-Delete" data-id="{{ conversation.id }}">Xóa</button>
+                    </div>
+                </li>
+            {% endfor %}
+        </ul>        
+    </div>
+    
+
+    <button id="open-sidebar"><i class="fa-solid fa-bars"></i></button>
+    <button id="new-chat"><i class="fa-solid fa-pen-to-square"></i></button>
+    <div id="user-menu">
+        <div id="user-info">
+            <i class="fa-solid fa-user"></i>
+            <p>{{ user_name }}</p>
+        </div>
+        <button id="logout-btn"><i class="fa-solid fa-right-from-bracket"></i> Đăng xuất</button>
+
+    </div>
+    
+    <div id="logo" class="nav__logo">
+        <strong>
+          <span class="edu">EDU</span><span class="bot">BOT</span>
+        </strong>
+      </div>      
+
+    <div id="chat-container">
+        <div id="chat-box">
+            <h1 id="intro" style="text-align: center;">Tôi có thể giúp gì cho bạn?</h1>
+        </div>
+        <div id="input-container">
+            <textarea id="user-input" placeholder="Hãy hỏi tôi bất cứ điều gì..." oninput="toggleButtons()" onkeydown="handleKeyPress(event)"></textarea>
+            <button id="mic-btn"><i class="fa-solid fa-microphone"></i></button>
+            <div id="listening-alert">🎙 Đang lắng nghe...</div>
+            <button id="send-btn" onclick="sendMessage()">Gửi</button>
+        </div>
+    </div>
+        <script src="{{ url_for('static', filename='js/script.js') }}"></script>
+</body>
+</html>

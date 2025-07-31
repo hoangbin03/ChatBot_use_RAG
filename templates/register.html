@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="vi">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Đăng Ký Tài Khoản</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            color: #fff;
+            height: 100vh;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            backdrop-filter: brightness(60%);
+            background: url("https://tenten.vn/tin-tuc/wp-content/uploads/2022/10/wu.jpeg")no-repeat center center fixed;
+            background-size: cover;
+        }
+        .register-form {
+            background: rgba(0, 0, 0, 0.8);
+            border-radius: 12px;
+            padding: 2.5rem;
+            width: 100%;
+            max-width: 450px;
+            box-shadow: 0 6px 12px rgba(0, 0, 0, 0.4);
+            backdrop-filter: blur(15px);
+        }
+        h1 {
+            margin-bottom: 2rem;
+            text-align: center;
+            font-weight: bold;
+        }
+        .form-control {
+            background: rgba(255, 255, 255, 0.15);
+            border: 1px solid rgba(255, 255, 255, 0.3);
+            color: #fff;
+            transition: all 0.3s ease-in-out;
+        }
+        .form-control:focus {
+            background: rgba(255, 255, 255, 0.25);
+            box-shadow: 0 0 10px rgba(255, 255, 255, 0.5);
+        }
+        .btn-primary {
+            background: linear-gradient(135deg, #007bff, #0056b3);
+            border: none;
+            padding: 0.75rem;
+            font-size: 1.2rem;
+            transition: 0.3s;
+            font-weight: bold;
+        }
+        .btn-primary:hover {
+            background: linear-gradient(135deg, #0056b3, #003f7f);
+        }
+        .form-label {
+            font-weight: bold;
+        }
+        a {
+            color: #00d4ff;
+            text-decoration: none;
+        }
+        a:hover {
+            text-decoration: underline;
+        }
+        .back-button {
+            padding: 0.75rem;
+            background-color: #3498db;
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            }
+
+            .back-button:hover {
+            background-color: #2980b9;
+            }
+    </style>
+</head>
+<body>
+    <div class="register-form">
+        <h1>Đăng Ký</h1>
+        <form action="{{ url_for('register.register') }}" method="POST">
+            <div class="mb-3">
+                <label for="user_name" class="form-label">Tên Người Dùng</label>
+                <input type="text" class="form-control" id="user_name" name="user_name" required>
+            </div>
+            <div class="mb-3">
+                <label for="ngay_sinh" class="form-label">Ngày Sinh</label>
+                <input type="date" class="form-control" id="ngay_sinh" name="ngay_sinh" required>
+            </div>
+            <div class="mb-3">
+                <label for="email" class="form-label">Email</label>
+                <input type="email" class="form-control" id="email" name="email" required>
+            </div>
+            <div class="mb-3">
+                <label for="sodienthoai" class="form-label">Số Điện Thoại</label>
+                <input type="text" class="form-control" id="sodienthoai" name="sodienthoai" required>
+            </div>
+            <div class="mb-3">
+                <label for="password" class="form-label">Mật Khẩu</label>
+                <input type="password" class="form-control" id="password" name="password" required>
+            </div>
+            <div class="d-flex justify-content-between gap-2">
+                <button type="submit" class="btn btn-primary w-50">Đăng Ký</button>
+                <button type="button" class="back-button w-50" onclick="history.back()">Quay lại</button>
+            </div>
+            </form>
+    </div>
+</body>
+</html>
