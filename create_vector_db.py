@@ -8,8 +8,8 @@ from sentence_transformers import SentenceTransformer
 model = SentenceTransformer('sentence-transformers/all-MiniLM-L6-v2')
 
 pdf_data_path = "data"
-vector_db_path = "vectorstores/db_faiss"
-documents_path = "vectorstores/documents.json" 
+vector_db_path = "vectorstores/db_faiss_2"
+documents_path = "vectorstores/documents2.json" 
 
 # Hàm để trích xuất văn bản từ file PDF
 def extract_text_from_pdfs(pdf_folder):
@@ -32,15 +32,15 @@ def create_db_from_files():
     global documents
     documents = extract_text_from_pdfs(pdf_data_path)
     
-    # Lưu tài liệu vào file JSON để sử dụng trong app.py
     with open(documents_path, 'w', encoding='utf-8') as f:
         json.dump(documents, f, ensure_ascii=False, indent=4)
     
-    embeddings = model.encode(documents).astype('float32')
+    embeddings = model.encode(documents, batch_size=32, show_progress_bar=True).astype('float32')
+    embedding_size = embeddings.shape[1]
     print("Embeddings generated.")
     
     # Tạo FAISS index
-    index = faiss.IndexFlatL2(embeddings.shape[1])
+    index = faiss.IndexFlatL2(embedding_size)
     index.add(embeddings)
     
     # Lưu index vào file
